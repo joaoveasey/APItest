@@ -6,6 +6,11 @@ namespace APItest.Infra
     {
         private readonly ConnectionContext _context = new ConnectionContext();
 
+        public Employee Get(int id)
+        {
+            return _context.Employees.Find(id);
+        }
+
         void IEmployeeRepository.Add(Employee employee)
         {
             _context.Employees.Add(employee);
