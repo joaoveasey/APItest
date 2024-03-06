@@ -16,7 +16,7 @@ namespace APItest.Controllers
             _employeeRepository = employeeRepository ?? throw new ArgumentNullException();
         }
 
-        [Authorize]
+        
         [HttpPost]
         public IActionResult Add([FromForm] EmployeeViewModel employeeView)
         {
@@ -32,7 +32,7 @@ namespace APItest.Controllers
             return Ok();
         }
 
-        [Authorize]
+        
         [HttpPost]
         [Route("{id}/download")]
         public IActionResult DownloadPhoto(int id)
@@ -44,7 +44,7 @@ namespace APItest.Controllers
             return File(dataBytes, "image/png");
         }
 
-        [Authorize]
+        
         [HttpGet] 
         public IActionResult Get()
         {
