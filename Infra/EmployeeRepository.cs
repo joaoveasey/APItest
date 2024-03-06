@@ -21,5 +21,11 @@ namespace APItest.Infra
         {
             return _context.Employees.ToList();
         }
+
+        public void Remove(Employee employee)
+        {
+            _context.Employees.Remove(employee);
+            _context.SaveChanges();
+        }
     }
 }

@@ -6,5 +6,6 @@
 
         List<Employee> Get();
         Employee Get(int id);
+        void Remove(Employee employee);
     }
 }

@@ -20,16 +20,16 @@ namespace APItest.Controllers
         [HttpPost]
         public IActionResult Add([FromForm] EmployeeViewModel employeeView)
         {
-            var filePath = Path.Combine("Storage", employeeView.Photo.FileName);
+                var filePath = Path.Combine("Storage", employeeView.Photo.FileName);
 
-            using Stream fileStream = new FileStream(filePath, FileMode.Create);
-            employeeView.Photo.CopyTo(fileStream);
+                using Stream fileStream = new FileStream(filePath, FileMode.Create);
+                employeeView.Photo.CopyTo(fileStream);
 
-            var employee = new Employee(employeeView.Name, employeeView.Age, filePath);
+                var employee = new Employee(employeeView.Name, employeeView.Age, filePath);
 
-            _employeeRepository.Add(employee);
+                _employeeRepository.Add(employee);
 
-            return Ok();
+                return Ok();
         }
 
         
@@ -38,10 +38,15 @@ namespace APItest.Controllers
         public IActionResult DownloadPhoto(int id)
         {
             var employee = _employeeRepository.Get(id);
-
-            var dataBytes = System.IO.File.ReadAllBytes(employee.photo);
-
-            return File(dataBytes, "image/png");
+            try
+            {
+                var dataBytes = System.IO.File.ReadAllBytes(employee.photo);
+                return File(dataBytes, "image/png");
+            }
+            catch
+            {
+                return NotFound();
+            }          
         }
 
         
@@ -51,6 +56,20 @@ namespace APItest.Controllers
             var employees = _employeeRepository.Get();
 
             return Ok(employees);
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            Employee employee = _employeeRepository.Get(id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            _employeeRepository.Remove(employee);
+            
+            return Ok();
         }
     }
 }
