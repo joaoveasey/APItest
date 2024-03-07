@@ -58,6 +58,26 @@ namespace APItest.Controllers
             return Ok(employees);
         }
 
+        [HttpPut]
+        public IActionResult Put(int id , [FromForm] EmployeeViewModel employeeView)
+        {
+            if (employeeView != null) 
+                return BadRequest();
+
+            try
+            {
+                var employee = _employeeRepository.Get(id);
+
+                _employeeRepository.Put(id, employee);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }  
+        }
+
         [HttpDelete]
         public IActionResult Delete(int id)
         {
