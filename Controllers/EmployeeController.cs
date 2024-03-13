@@ -58,6 +58,26 @@ namespace APItest.Controllers
             return Ok(employees);
         }
 
+        [HttpPatch]
+        public IActionResult Patch(int id, [FromForm] EmployeeViewModel employeeView)
+        {
+            if (employeeView == null) 
+                return BadRequest();
+
+            Employee employee = _employeeRepository.Get(id);
+            _employeeRepository.Remove(employee);
+
+            var filePath = Path.Combine("Storage", employeeView.Photo.FileName);
+
+            using Stream fileStream = new FileStream(filePath, FileMode.Create);
+            employeeView.Photo.CopyTo(fileStream);
+
+            var employee_ = new Employee(employeeView.Name, employeeView.Age, filePath);
+            _employeeRepository.Patch(employee_);
+
+            return Ok();
+        }
+
         [HttpDelete]
         public IActionResult Delete(int id)
         {
