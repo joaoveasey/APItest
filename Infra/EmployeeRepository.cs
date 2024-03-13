@@ -22,6 +22,12 @@ namespace APItest.Infra
             return _context.Employees.ToList();
         }
 
+        void IEmployeeRepository.Patch(Employee employee)
+        {
+            _context.Employees.Update(employee);
+            _context.SaveChanges();
+        }
+
         public void Remove(Employee employee)
         {
             _context.Employees.Remove(employee);

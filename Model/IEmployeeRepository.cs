@@ -6,6 +6,6 @@
         List<Employee> Get();
         Employee Get(int id);
         void Remove(Employee employee);
-        void Put(int id,Employee employee);
+        void Patch(Employee employee);
     }
 }

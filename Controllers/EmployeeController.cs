@@ -58,24 +58,24 @@ namespace APItest.Controllers
             return Ok(employees);
         }
 
-        [HttpPut]
-        public IActionResult Put(int id , [FromForm] EmployeeViewModel employeeView)
+        [HttpPatch]
+        public IActionResult Patch(int id, [FromForm] EmployeeViewModel employeeView)
         {
-            if (employeeView != null) 
+            if (employeeView == null) 
                 return BadRequest();
 
-            try
-            {
-                var employee = _employeeRepository.Get(id);
+            Employee employee = _employeeRepository.Get(id);
+            _employeeRepository.Remove(employee);
 
-                _employeeRepository.Put(id, employee);
+            var filePath = Path.Combine("Storage", employeeView.Photo.FileName);
 
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }  
+            using Stream fileStream = new FileStream(filePath, FileMode.Create);
+            employeeView.Photo.CopyTo(fileStream);
+
+            var employee_ = new Employee(employeeView.Name, employeeView.Age, filePath);
+            _employeeRepository.Patch(employee_);
+
+            return Ok();
         }
 
         [HttpDelete]
