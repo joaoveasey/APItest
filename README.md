@@ -1,4 +1,4 @@
-# API test
+# WEB API
 
 crud simples com uma web api .net 7 para consolidar conhecimento em APIs
 
@@ -10,14 +10,13 @@ crud simples com uma web api .net 7 para consolidar conhecimento em APIs
 
 ## Visão Geral
 
-a finalidade deste projeto é fornecer um exemplo prático de como criar uma api rest para operações básicas de um sistema de gerenciamento de recursos, neste caso, gerenciando informações de funcionários(as).
+a finalidade deste projeto é fornecer um exemplo prático de como criar uma web api para operações básicas de um sistema de gerenciamento de recursos, neste caso, gerenciando informações de funcionários(as).
 
 
 ## Tecnologias Utilizadas
 
 - .net 7
-- api rest
-- entity framework core
+- entity framework
 - sql server management studio
 - swagger
 
