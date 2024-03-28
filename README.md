@@ -12,6 +12,8 @@ crud simples com uma web api .net 7 para consolidar conhecimento em APIs
 
 a finalidade deste projeto é fornecer um exemplo prático de como criar uma web api para operações básicas de um sistema de gerenciamento de recursos, neste caso, gerenciando informações de funcionários(as).
 
+![image](https://github.com/joaoveasey/WEB-API/assets/125090850/59cc4f50-bc84-4b6e-b3a0-73e34597d0a3)
+
 
 ## Tecnologias Utilizadas
 
